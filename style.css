@@ -13,18 +13,36 @@ body {
 }
 .options {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 20px 0;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow buttons to wrap to next line on small screens */
 }
+
 .option {
-    padding: 15px 25px;
+    padding: 12px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: transform 0.2s;
-    margin: 0 7px; /* Adds horizontal margin on both sides */
     background-color: rgba(70,70,70,0.2);
+    flex: 1 1 200px; /* Flexible width with min-width of 200px */
+    max-width: 300px; /* Prevent buttons from getting too wide */
+    margin-bottom: 10px; /* Space between rows when wrapped */
+    overflow-wrap: break-word; /* Prevent text overflow */
+}
+
+/* For very small screens, stack buttons vertically */
+@media (max-width: 500px) {
+    .options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .option {
+        max-width: 100%;
+    }
 }
 .option:hover {
     transform: scale(1.05);
