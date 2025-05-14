@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Personnalité DISC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Test de Personnalité DISC</h1>
+    <p>Choisissez l'adjectif qui vous décrit le mieux dans chaque paire.</p>
+
+    <div id="test">
+        <h2 id="question-number">Question 1/??</h2>
+        <div class="options">
+            <button class="option" id="option-D" style="background-color: rgba(70,70,70,0.2);"></button>
+            <button class="option" id="option-I" style="background-color: rgba(70,70,70,0.2);"></button>
+            <button class="option" id="option-S" style="background-color: rgba(70,70,70,0.2);"></button>
+            <button class="option" id="option-C" style="background-color: rgba(70,70,70,0.2);"></button>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+
+    <div id="results">
+        <h2>Vos résultats</h2>
+        <div class="result-graph">
+            <div class="bar" style="height: 200px;">
+                <div class="bar-fill" id="d-bar" style="background-color: red;"></div>
+                <div class="bar-label">D (Rouge)<br>Dominant</div>
+            </div>
+            <div class="bar" style="height: 200px;">
+                <div class="bar-fill" id="i-bar" style="background-color: yellow;"></div>
+                <div class="bar-label">I (Jaune)<br>Influent</div>
+            </div>
+            <div class="bar" style="height: 200px;">
+                <div class="bar-fill" id="s-bar" style="background-color: green;"></div>
+                <div class="bar-label">S (Vert)<br>Stable</div>
+            </div>
+            <div class="bar" style="height: 200px;">
+                <div class="bar-fill" id="c-bar" style="background-color: blue;"></div>
+                <div class="bar-label">C (Bleu)<br>Conforme</div>
+            </div>
+        </div>
+        <div id="primary-type" class="description"></div>
+        <button id="restart" class="option">Recommencer le test</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
