@@ -88,3 +88,26 @@ body {
     text-align: left;
     margin: 20px 0;
 }
+
+.navigation-buttons {
+    margin: 15px 0;
+}
+
+.nav-button {
+    padding: 10px 15px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #5a6268;
+}
+
+#previous-question {
+    display: none; /* Caché par défaut sur la première question */
+}

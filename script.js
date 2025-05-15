@@ -38,7 +38,7 @@ const questions = [
     },
     {
         D: "Ferme et entreprenant",
-        I: "Ouvert de persuasif",
+        I: "Ouvert et persuasif",
         S: "Appliqué et sélectif dans ses relations",
         C: "Posé et dynamique"
     },
@@ -148,7 +148,7 @@ const questions = [
         D: "Direct et carré",
         I: "Expressif et radieux",
         S: "Tolérant et ferme",
-        C: "Détaillé er précautionneux"
+        C: "Détaillé et précautionneux"
     },
 ];
 
@@ -163,6 +163,8 @@ const descriptions = {
 // Variables de gestion du test
 let currentQuestion = 0;
 let scores = { D: 0, I: 0, S: 0, C: 0 };
+// Tableau pour stocker les réponses de l'utilisateur
+let userAnswers = [];
 
 // Éléments du DOM
 const optionDButton = document.getElementById('option-D');
@@ -174,8 +176,21 @@ const progressBar = document.getElementById('progress');
 const testSection = document.getElementById('test');
 const resultsSection = document.getElementById('results');
 const restartButton = document.getElementById('restart');
+const previousButton = document.getElementById('previous-question');
 
-// Fonction pour afficher une question
+// Fonction pour mélanger les options
+function shuffleOptions() {
+    const optionsContainer = document.querySelector('.options');
+    const options = Array.from(optionsContainer.children);
+
+    // Algorithme de Fisher-Yates pour mélanger le tableau
+    for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        optionsContainer.appendChild(options[j]);
+    }
+}
+
+// Modifier la fonction displayQuestion pour inclure le mélange
 function displayQuestion() {
     if (currentQuestion < questions.length) {
         const question = questions[currentQuestion];
@@ -185,6 +200,12 @@ function displayQuestion() {
         optionCButton.textContent = question.C;
         questionNumber.textContent = `Question ${currentQuestion + 1}/${questions.length}`;
         progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
+
+        // Afficher/masquer le bouton précédent
+        previousButton.style.display = currentQuestion > 0 ? 'inline-block' : 'none';
+
+        // Mélanger l'ordre des options
+        shuffleOptions();
     } else {
         showResults();
     }
@@ -193,8 +214,22 @@ function displayQuestion() {
 // Fonction pour enregistrer la réponse et passer à la question suivante
 function recordAnswer(type) {
     scores[type]++;
+    userAnswers[currentQuestion] = type;
     currentQuestion++;
     displayQuestion();
+}
+
+// Fonction pour revenir à la question précédente
+function goToPreviousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        // Décrémenter le score de la réponse précédente
+        const previousAnswer = userAnswers[currentQuestion];
+        if (previousAnswer) {
+            scores[previousAnswer]--;
+        }
+        displayQuestion();
+    }
 }
 
 // Fonction pour afficher les résultats
@@ -226,14 +261,17 @@ function showResults() {
 }
 
 // Initialiser les événements
+previousButton.addEventListener('click', goToPreviousQuestion);
 optionDButton.addEventListener('click', () => recordAnswer("D"));
 optionIButton.addEventListener('click', () => recordAnswer("I"));
 optionSButton.addEventListener('click', () => recordAnswer("S"));
 optionCButton.addEventListener('click', () => recordAnswer("C"));
 
+// Réinitialiser également userAnswers lors du redémarrage
 restartButton.addEventListener('click', () => {
     currentQuestion = 0;
     scores = { D: 0, I: 0, S: 0, C: 0 };
+    userAnswers = [];
     testSection.style.display = 'block';
     resultsSection.style.display = 'none';
     displayQuestion();
