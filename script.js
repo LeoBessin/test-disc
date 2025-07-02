@@ -4,7 +4,7 @@ const questions = [
         D: "Stratège et entreprenant",
         I: "Influent et démonstratif",
         S: "Loyal et attentif à autrui",
-        C: "Influent et démonstratif"
+        C: "Prudent et réfléchi"
     },
     {
         D: "Méthodique et logique",
